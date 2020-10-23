@@ -1,0 +1,46 @@
+.Login{
+    
+    background-image:url('https://bmcmiri.com/wp-content/uploads/2019/08/bigstock-Doctor-In-Hospital-Background-224963761.jpg');
+    height: 750px;
+    overflow: auto;
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#box1{
+    border:3px solid;
+    position:absolute;
+    top:100px;
+    height: 530px;
+    width:600px;
+    background-color: #ffffff00;
+    font-size: 25px;
+    font-weight: bold;
+    left:600px;
+    align-items: flex-end;
+}
+.box1inp{
+    margin: 10px 0;
+    padding: 2px;
+    position: absolute;
+    left: 250px;
+}
+.head1{
+    left:600px;
+    position:absolute;
+    top:7px;
+    font-weight: bold;
+}
+.im{
+    position: absolute;
+    height:100px;
+    width:100px;
+    bottom:460px;
+    left:240px;
+}
+.but{
+    position: absolute;
+    right:10px;
+    top:10px;
+
+}

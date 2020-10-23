@@ -1,0 +1,13 @@
+.steal{
+    left:40px;
+    position: relative;
+    
+}
+.mainn{
+    background-image: url('https://image.freepik.com/free-photo/blur-hospital_1203-7972.jpg');
+    height: 750px;
+    overflow: auto;
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

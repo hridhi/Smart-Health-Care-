@@ -1,0 +1,23 @@
+.image{
+    border:3px solid;
+    position:absolute;
+    top:130px;
+    height:550px;
+    width:600px;
+    background-color: #ffffff00;
+    font-size: 25px;
+    left:40px;
+    padding-left:30px;
+}
+.calender{
+    height: 3500px;
+    width:500px;
+    position: relative;
+    left: 850px;
+    top:70px;
+}
+.make-app{
+    left: 900px;
+    top:1000px;
+    position : relative;
+}

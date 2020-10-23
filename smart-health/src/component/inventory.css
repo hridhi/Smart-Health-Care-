@@ -1,0 +1,22 @@
+.bill{
+    width: 1000px;
+    position: relative;
+    height: 1000px;
+    float:center;
+    top:70px;
+    left:300px;
+    font-weight: bolder;
+    font-size: 50px;
+}
+.home{
+    position: relative;
+    top:50px;
+    left:1000px; 
+ }
+.Tablee{
+    border: 3px solid black;
+ }
+ .start{
+     position:relative;
+     left:50px;
+ }

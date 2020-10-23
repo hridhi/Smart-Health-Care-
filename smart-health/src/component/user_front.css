@@ -1,0 +1,28 @@
+.heading{
+   font-size: 25px;
+}
+.overall{
+    background-image: url('https://yoursightmatters.com/wp-content/uploads/2013/03/eyedoctor.jpg');
+    height: 1500px;
+    overflow: auto;
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.details{
+    position:absolute;
+    top:100px;
+    height: 530px;
+    width:600px;
+    font-size: 25px;
+    font-weight: bold;
+    left:300px;
+    align-items: flex-end;
+}
+.box1inp{
+    margin: 10px 0;
+    padding: 2px;
+    position: absolute;
+    left: 250px;
+}
