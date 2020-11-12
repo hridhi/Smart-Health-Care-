@@ -249,22 +249,17 @@ app.post("/test_report",(req,res)=>
     {
         db.query("select * from test_report where p_id=(?)", [pid5],function (err,result) 
         {
-            test_id = JSON.stringify(result[0].test_id);
-            test_name = JSON.stringify(result[0].test_name);
+            /*test_name = JSON.stringify(result[0].test_name);
             test_doc = JSON.stringify(result[0].test_doc);
             test_category = JSON.stringify(result[0].test_category);
-            exports.test_details = (req,res)=>
-            {
                 res.json({
                     "test name":[test_name],
                     "test category":[test_category],
                     "test details":[test_doc],
-                })
-            }
-                
-            console.log('lid: '+result);
-
+                })*/
+                console.log(result);
             
+            console.log('lid: '+result);
         });
     });
 })

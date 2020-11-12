@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react';//,{Component} 
 import "./inventory.css";
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {useEffect,useState} from 'react';
+//import {useEffect,useState} from 'react';
   const uploadtest=()=>{
     return (
+
       <div className="thisisit">
       <div className="details">
         <Link to ="/staff-front"><Button className="home">Home</Button></Link>
@@ -24,10 +25,9 @@ import {useEffect,useState} from 'react';
         </form>
       </div>
       </div>
-      
+       
     );
   }
-
   function submit_view_test(e){
     e.preventDefault();
     let request =  {
@@ -40,16 +40,26 @@ import {useEffect,useState} from 'react';
     .catch(err=>{
       console.log(err);
     })
-    const [initialState, setInitialState] = useState ([
-      useEffect (()=>{
-        fetch('/').then(res=>{
-          if(res.ok)
-          {
-            return res.json()
-          }
-        }).then(jsonResponse => setInitialState(jsonResponse.hello))
-      }
-      )
-    ])
   }
-export default uploadtest
+/*
+  class RandomPlace extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            response: {},
+        };
+    }
+    async componentDidMount() {
+        const res = await axios.get('/test_report');
+        this.setState({ response: res.data })
+    }
+    render() {
+        return (
+            <div>
+                {this.state.response}
+            </div>
+        );
+    }
+}
+export {RandomPlace};*/
+export default uploadtest;
