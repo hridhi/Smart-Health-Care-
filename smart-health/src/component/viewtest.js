@@ -2,43 +2,54 @@ import React from 'react';
 import "./inventory.css";
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import {useEffect,useState} from 'react';
   const uploadtest=()=>{
     return (
       <div className="thisisit">
       <div className="details">
         <Link to ="/staff-front"><Button className="home">Home</Button></Link>
         <h1>View test report</h1>
-        <div className="start">
+        <form id="myForm" onSubmit={(e)=>submit_view_test(e)}>
+          <div className="start">
+        
             <h5>Patient ID</h5>
-            <input value="2346576"></input>
+            <input id="pid5"></input>
             <Button>Enter</Button>
             <br></br>
             <br></br>
-            </div>
-      <form>
-            <br></br>
-            <label>
-            Test name
-            <br></br>
-            <p>TSH</p>
-            </label>
-            <br></br>
-            <label>
-            Test category
-            <br></br>
-            <p>Thyroid</p>
-            </label>
-            <br></br>
-            <label>
-            Test details
-            <br></br>
-                <p>TSH =1.070 <br></br> Thyroxin = 5.6 <br></br> T3 uptake = 27 <br></br>FTI =15<br></br>conclusion:<br></br>    TSh levels are abnormal</p>
-            </label>
+
+          </div>
+            
         </form>
-        </div>
-        </div>
+      </div>
+      </div>
       
     );
   }
 
+  function submit_view_test(e){
+    e.preventDefault();
+    let request =  {
+      pid5:document.getElementById('pid5').value,
+    }
+    axios.post('http://localhost:3001/test_report',request)
+    .then(resp=>{
+      alert(resp.data.message);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+    const [initialState, setInitialState] = useState ([
+      useEffect (()=>{
+        fetch('/').then(res=>{
+          if(res.ok)
+          {
+            return res.json()
+          }
+        }).then(jsonResponse => setInitialState(jsonResponse.hello))
+      }
+      )
+    ])
+  }
 export default uploadtest

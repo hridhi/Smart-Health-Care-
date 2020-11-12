@@ -11,7 +11,7 @@ const staff_front=()=>{
 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 <Navbar.Collapse id="responsive-navbar-nav">
   <Nav className="mr-auto">
-   <Nav.Link href="/medical-history">Update medical history</Nav.Link>
+   <Nav.Link href="/medical-history">View medical history</Nav.Link>
     <Nav.Link href="/inventory">Check Inventory</Nav.Link>
     <Nav.Link href="/pharmacy">Pharmacy</Nav.Link>
     <Nav.Link href="/billing">Billing</Nav.Link>

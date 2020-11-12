@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';//, { Component }
 import { Nav, Navbar,Button } from "react-bootstrap";
 import image from "./download.png";
 import './user_home.css';
 import Calendar from 'react-calendar';
-import { Document, Page } from 'react-pdf';
+//import { Document, Page } from 'react-pdf';
 import { Link } from 'react-router-dom';
+
 const userhome=()=>{
     return (
       <div className="boddy">
@@ -14,10 +15,10 @@ const userhome=()=>{
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#medicalhistory">Medical history </Nav.Link>
-          <Nav.Link href="#cprescription">Current Prescription</Nav.Link>
-          <Nav.Link href="#cprescription">View test reports</Nav.Link>
-          <Nav.Link href="#cprescription">Bills</Nav.Link>
+          <Nav.Link href="/medicalhistory">Medical history </Nav.Link>
+          <Nav.Link href="/cprescription">Current Prescription</Nav.Link>
+          <Nav.Link href="/viewtest">View test reports</Nav.Link>
+          <Nav.Link href="/billing">Bills</Nav.Link>
         </Nav>
         <Nav>
         <Link to='/user_front'><Button variant="dark" >Update your details</Button></Link>
@@ -25,7 +26,6 @@ const userhome=()=>{
   </Nav> 
       </Navbar.Collapse>
       </Navbar>
-
       <div className="image">
         <img src={image} alt="hello"></img>
           <p>
@@ -46,4 +46,5 @@ const userhome=()=>{
       </div>
     );
   }
+  
 export default userhome;

@@ -37,7 +37,7 @@ const home=() => {
 <p>We at Athena strive hard to provide you with world class medical facilities and services.With branches spread across the nation our family has expanded and
 achieved new heights in the field of medicine. You as our patients are our number one priority and we will make sure just being a part of our family will
 make you feel safe and protected, it is the trust our patients have in us and the non stop effort our staff puts in that us helped grow and reach where we
-are today but it doesn't stop here , we will continue to support you through your difficult times and a well wisher rooting for your good health.
+are today but it does not stop here , we will continue to support you through your difficult times and a well wisher rooting for your good health.
 <br></br>
 
                    
@@ -62,7 +62,7 @@ Ambulance Services<br></br>
 <br></br>
 by registering and becoming a part our family you can check out whether the tests you are required to do or the medicines you are prescribed by the doctor
 are available at your nearest branch,make online appointments and maintain online health database. come become a part of our family and avail the beinfits
-if you already aren't by signing up!</p>
+if you already are not by signing up!</p>
 </div>
 <br></br>
 <br></br>

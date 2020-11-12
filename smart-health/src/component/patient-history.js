@@ -1,5 +1,6 @@
 import React from 'react';
 import './user_front.css';
+import axios from 'axios';
   const userfront=()=>{
     return (
       <div className="overall">
@@ -7,51 +8,57 @@ import './user_front.css';
       <p>Help us to get you know better </p>
       </div>
       <div className="details">
-      <form>
+      <form id="myForm" onSubmit={(e)=>submit_p_medhistory(e)}>
            <br></br>
+           <label>
+              enter you patient ID:
+              <textarea id="P_ID"name="message" rows="3" cols="30"></textarea>
+                </label>
+            <br></br>
+            <label></label>
          <label>
               List your allergies if any.
-              <textarea name="message" rows="3" cols="30"></textarea>
+              <textarea id="allergy"name="message" rows="3" cols="30"></textarea>
                 </label>
             <br></br>
             <label>
             Have you had severe reaction to any specific medicine in the past?
-            <textarea name="message" rows="3" cols="30"></textarea>
+            <textarea id="reaction" name="message" rows="3" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             Have you undergone any major surgeries?
-            <textarea name="message" rows="1" cols="30"></textarea>
+            <textarea id="surgery" name="message" rows="1" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             what medicines you have been taking and what they are for?
             <br></br>
-                <textarea name="message" rows="3" cols="30"></textarea>
+                <textarea id="medicine" name="message" rows="3" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             How long have you been on these medicines?
             <br></br>
-            <textarea name="message" rows="1" cols="30"></textarea>
+            <textarea id="duration" name="message" rows="1" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             Which medications have had a change in how you take them?
             <br></br>
-            <textarea name="message" rows="3" cols="30"></textarea>
+            <textarea id="med_det" name="message" rows="3" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             Elaborate on your eating habits
             <br></br>
-            <textarea name="message" rows="3" cols="30"></textarea>
+            <textarea id="eat" name="message" rows="3" cols="30"></textarea>
             </label>
             <br></br>
             <label>
             Do you exercise?mention no of hrs
             <br></br>
-            <textarea name="message" rows="1" cols="30"></textarea>
+            <textarea id="workout" name="message" rows="1" cols="30"></textarea>
             </label>
             <br></br>
            <input type="submit" value="Submit" className='box1inp' />
@@ -61,5 +68,25 @@ import './user_front.css';
       </div>
     );
   }
-
+  function submit_p_medhistory(e){
+    e.preventDefault();
+    let request =  {
+        pid:document.getElementById('P_ID').value,
+        allergy:document.getElementById('allergy').value,
+        reaction:document.getElementById('reaction').value,
+        surgery:document.getElementById('surgery').value,
+        medicine:document.getElementById('medicine').value,
+        duration:document.getElementById('duration').value,
+        med_det:document.getElementById('med_det').value,
+        eat:document.getElementById('eat').value,
+        workout:document.getElementById('workout').value,
+    }
+    axios.post('http://localhost:3001/insert_p_med_his',request)
+    .then(resp=>{
+      alert(resp.data.message);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 export default userfront;
