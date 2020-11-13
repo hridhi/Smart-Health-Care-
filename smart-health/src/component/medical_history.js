@@ -2,64 +2,49 @@ import React from 'react';//, { useState }
 import "./medical-history.css";
 import { Button} from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+
+var element;
 const MEDICAL=()=>{
     return(
         <div className="thisisit">
         <Link to ="/staff-front"><Button className="homee">Home</Button></Link>
-        <div className="start">
-            <h5>Enter Patient ID</h5>
-            <input  value="2346576" ></input>
-            <Button>Enter</Button>
-            </div>
-            <div className="boddy">
-      <form>
-         <label>
-              List of Allergies.
-              <p>Dust allergy</p>
-                </label>
-            <br></br>
-            <label>
-            Severe reaction to any specific medicine in the past.
-            <p>Yes once when I had paracetamol I had vomitings and swelling of my arms and legs and was unwell till 3 days</p>
-            </label>
-            <br></br>
-            <label>
-            Major surgeries undergone.
-            <p>No I havent undergone any major surgeries</p>
-            </label>
-            <br></br>
-            <label>
-            Current Medication.
-            <br></br>
-                <p>I have been on astrovastin 400 mg for controlling cholestrol levels.</p>
-            </label>
-            <br></br>
-            <label>
-            Duration of medication.
-            <br></br>
-            <p>I have been prescribed to take these daily for the past 3 years.</p>
-            </label>
-            <br></br>
-            <label>
-            Change in medication.
-            <br></br>
-            <p>Nill</p>
-            </label>
-            <br></br>
-            <label>
-            Eating habits.
-            <br></br>
-            <p>I have a pretty good diet.I eat fruits regularly and also drink sufficient water.</p>
-            </label>
-            <br></br>
-            <label>
-            Exercise and number of hours.
-            <br></br>
-            <p>Yes I exercise everyday. I exercise 30 min a day.</p>
-            </label>
-            <br></br>
+        <div className="start"></div>
+        <div className="boddy">
+        <form id="myForm" onSubmit={(e)=>submit_med_his(e)}>
+                <h5>Enter Patient ID</h5>
+                <input id="pid6"></input>
+                <Button type="submit">Enter</Button>
+                <div id="data"></div>
         </form>
         </div>
         </div>
 )}
+function submit_med_his(e){
+    e.preventDefault();
+    let request =  {
+      pid6:document.getElementById('pid6').value,
+    }
+    axios.post('http://localhost:3001/med_his',request)
+    .then(resp=>{
+      console.log(resp);
+      var details = resp.data;
+     
+      element = <ul>
+      <li>PRESCRIPTION ID:{details.pr_id}</li>    
+      <li> ALLERGY TO ANY MEDICINES: {details.med_allergy} </li>
+      <li> CURRENT MEDICATION THE PATIENT IS ON: {details.med_current}</li>
+      <li>MEDICATION THE PATIENT HAS BEEN IN THE PAST: {details.med_past}</li>
+      
+      </ul>
+      
+      ReactDOM.render(element, document.getElementById('data'));
+      //alert(resp.data);
+      
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 export default MEDICAL;

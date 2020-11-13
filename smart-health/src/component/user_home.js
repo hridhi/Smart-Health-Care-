@@ -15,10 +15,9 @@ const userhome=()=>{
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/medicalhistory">Medical history </Nav.Link>
+
           <Nav.Link href="/cprescription">Current Prescription</Nav.Link>
           <Nav.Link href="/viewtest">View test reports</Nav.Link>
-          <Nav.Link href="/billing">Bills</Nav.Link>
         </Nav>
         <Nav>
         <Link to='/user_front'><Button variant="dark" >Update your details</Button></Link>

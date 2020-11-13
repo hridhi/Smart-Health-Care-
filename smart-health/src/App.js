@@ -18,6 +18,7 @@ import insurance from './component/insurance';
 import writePrescription from './component/write-prescription';
 import uploadtest from './component/upload-test-report';
 import viewtest from './component/viewtest';
+import currp from './component/curr';
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
              <Route path="/write-prescription" component={writePrescription}/>
              <Route path="/uploadtest" component={uploadtest}/>
              <Route path="/viewtest" component={viewtest}/>
+             <Route path="/cprescription" component={currp}/>
            </Switch>
       </BrowserRouter> 
     );

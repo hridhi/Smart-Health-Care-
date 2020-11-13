@@ -1,8 +1,10 @@
-import React from 'react';//,{Component} 
+import React from 'react';// ,{Component}
 import "./inventory.css";
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
+var element;
 //import {useEffect,useState} from 'react';
   const uploadtest=()=>{
     return (
@@ -16,9 +18,11 @@ import axios from 'axios';
         
             <h5>Patient ID</h5>
             <input id="pid5"></input>
-            <Button>Enter</Button>
+            <br></br>
+            <Button type="submit" variant="dark" id="submit" className='box1inp'>Enter</Button>
             <br></br>
             <br></br>
+            <div id="data"></div>
 
           </div>
             
@@ -35,7 +39,17 @@ import axios from 'axios';
     }
     axios.post('http://localhost:3001/test_report',request)
     .then(resp=>{
-      alert(resp.data.message);
+      console.log(resp);
+      var details = resp.data;
+      element = <ul>
+      <li> TEST NAME: {details.test_name} </li>
+      <li> TEST CATEGORY: {details.test_category}</li>
+      <li>TEST DETAILS: {details.test_details}</li>
+      </ul>
+      
+      ReactDOM.render(element, document.getElementById('data'));
+      //alert(resp.data);
+      
     })
     .catch(err=>{
       console.log(err);
@@ -43,8 +57,9 @@ import axios from 'axios';
   }
 /*
   class RandomPlace extends Component {
+    
     constructor(props) {
-        super(props);
+        super (props);
         this.state = {
             response: {},
         };
@@ -60,6 +75,6 @@ import axios from 'axios';
             </div>
         );
     }
-}
-export {RandomPlace};*/
+}*/
+//export {RandomPlace};
 export default uploadtest;

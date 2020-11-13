@@ -221,13 +221,14 @@ app.post("/pay_det",(req,res)=>
         });
     });
 })
-app.post("/make_app",(req,res)=>
+
+app.post("/make-appoinment",(req,res)=>
 {
     const pid4 = req.body.pid4;
     desp = req.body.desp;
     const time = req.body.time;
     const date=req.body.date;
-    const brid = req.body.br_id; 
+    const br_id = req.body.br_id; 
     console.log('hello'+br_id);
     db.getConnection(function(err) 
     {
@@ -249,20 +250,124 @@ app.post("/test_report",(req,res)=>
     {
         db.query("select * from test_report where p_id=(?)", [pid5],function (err,result) 
         {
-            /*test_name = JSON.stringify(result[0].test_name);
+            test_name = JSON.stringify(result[0].test_name);
             test_doc = JSON.stringify(result[0].test_doc);
             test_category = JSON.stringify(result[0].test_category);
-                res.json({
-                    "test name":[test_name],
-                    "test category":[test_category],
-                    "test details":[test_doc],
-                })*/
-                console.log(result);
             
-            console.log('lid: '+result);
+               const details = res.json({
+                    test_name:[test_name.replace(/^"(.*)"$/, '$1')],
+                    test_category:[test_category.replace(/^"(.*)"$/, '$1')],
+                    test_details:[test_doc.replace(/^"(.*)"$/, '$1')]
+                })
+               res.send(`${details}`)
+             
         });
     });
 })
+app.post("/med_his",(req,res)=>
+{
+    const pid6 = req.body.pid6;
+    db.getConnection(function(err) 
+    {
+        db.query("select * from med_history where p_id=(?)", [pid6],function (err,result) 
+        {
+            console.log(result);
+            med_allergy = JSON.stringify(result[0].med_allergy);
+            med_current= JSON.stringify(result[0].med_current);
+            med_past = JSON.stringify(result[0].med_past);
+            pr_id = JSON.stringify(result[0].pr_id);
+            
+               const details = res.json({
+                    med_allergy:[med_allergy.replace(/^"(.*)"$/, '$1')],
+                    med_current:[med_current.replace(/^"(.*)"$/, '$1')],
+                    med_past:[med_past.replace(/^"(.*)"$/, '$1')],
+                    pr_id:[pr_id]
+                })
+                
+               res.send(`${details}`)
+                
+                    
+            
+            
+        });
+    });
+})
+app.post("/ins",(req,res)=>
+{
+    const pid7 = req.body.pid7;
+    db.getConnection(function(err) 
+    {
+        db.query("select * from insurance where p_id=(?)", [pid7],function (err,result) 
+        {
+            console.log(result);
+            ins_id = JSON.stringify(result[0].ins_id);
+            ins_name= JSON.stringify(result[0].ins_name);
+            ins_category = JSON.stringify(result[0].ins_category);
+            
+               const details = res.json({
+                ins_id:[ins_id.replace(/^"(.*)"$/, '$1')],
+                ins_name:[ins_name.replace(/^"(.*)"$/, '$1')],
+                ins_category:[ins_category.replace(/^"(.*)"$/, '$1')],
+                })
+                
+               res.send(`${details}`)
+                
+                    
+            
+            
+        });
+    });
+})
+app.post("/chk-inv",(req,res)=>
+{
+    const brid= req.body.brid;
+    const eqid= req.body.eqid;
+    db.getConnection(function(err) 
+    {
+        db.query("select * from inventory where eq_id=(?) and br_id=(?)", [eqid,brid],function (err,result) 
+        {
+            console.log(result);
+            eq_status = JSON.stringify(result[0].eq_status);
+            eq_no= JSON.stringify(result[0].eq_no);
+            eq_name= JSON.stringify(result[0].eq_name);
+           
+            const details = res.json(
+                {
+                eq_no:[eq_no.replace(/^"(.*)"$/, '$1')],
+                eq_status:[eq_status.replace(/^"(.*)"$/, '$1')],
+                eq_name:[eq_name.replace(/^"(.*)"$/, '$1')],
+                })
+               res.send(`${details}`)
+        });
+    });
+})
+
+app.post("/pharm",(req,res)=>
+{
+    const med_id= req.body.med_id;
+    const br_id= req.body.br_id;
+    db.getConnection(function(err) 
+    {
+        db.query("select * from medicine where med_id=(?) and br_id=(?)", [med_id,br_id],function (err,result) 
+        {
+            console.log(result);
+            med_name = JSON.stringify(result[0].med_name);
+            med_availability= JSON.stringify(result[0].med_status);
+            med_category= JSON.stringify(result[0].med_category);
+            med_price= JSON.stringify(result[0].med_price);
+           
+            const details = res.json(
+                {
+                med_name:[ med_name.replace(/^"(.*)"$/, '$1')],
+                med_availability:[med_availability.replace(/^"(.*)"$/, '$1')],
+                med_category:[ med_category.replace(/^"(.*)"$/, '$1')],
+                med_price:[ med_price.replace(/^"(.*)"$/, '$1')],
+                })
+               res.send(`${details}`)
+        });
+    });
+})
+
 app.listen(3001,()=>{
     console.log('running on port 3000');
 })

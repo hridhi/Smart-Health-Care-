@@ -53,30 +53,14 @@ const makeappoinments=()=>{
     <input id="br_id" type="text" name="name" />
     <br></br>
     <br></br>
-    <Button variant="dark" >Set appoinment</Button>
+    <Button type="submit" variant="dark" id="submit" className='box1inp'>Set appoinment</Button>
     </form>
     </div>
   </div>
   
     )
 }
-/*
-function submit_appointment(e){
-  e.preventDefault();
-  let request =  {
-      pid4:document.getElementById('pid4').value,
-      description:document.getElementById('description').value,
-      time:document.getElementById('time').value,
-      date:document.getElementById('date').value,  
-  }
-  axios.post('http://localhost:3001/make_app',request)
-  .then(resp=>{
-    alert(resp.data.message);
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-}*/
+
 
 function submit_appointment(e){
   e.preventDefault();
@@ -87,7 +71,7 @@ function submit_appointment(e){
       pid4:document.getElementById('pid4').value,
       br_id:document.getElementById('br_id').value
   }
-  axios.post('http://localhost:3001/make_app',request)//incomplete
+  axios.post('http://localhost:3001/make-appoinment',request)//incomplete
   .then(resp=>{
     alert(resp.data.message);
   })

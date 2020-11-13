@@ -77,7 +77,7 @@ const billing=()=>{
         <div className="thisisit">
         <div className="details">
           <Link to ="/staff-front"><Button className="home">Home</Button></Link>
-          <h1>Update the test report</h1>
+          <h1>Update Bills</h1>
           <form id="myForm" onSubmit={(e)=>submit_pay_details(e)}>
              <br></br>
            <label>
@@ -101,13 +101,13 @@ const billing=()=>{
               <label>
               payment date
               <br></br>
-                  <textarea id="pay_date" name="message" rows="4" cols="30"></textarea>
+                  <textarea id="pay_date" name="message" rows="1" cols="30"></textarea>
               </label>
               <br></br>
               <label>
               payment method
               <br></br>
-                  <textarea id="pay_method" name="message" rows="4" cols="30"></textarea>
+                  <textarea id="pay_method" name="message" rows="1" cols="30"></textarea>
               </label>
               <br></br>
               
