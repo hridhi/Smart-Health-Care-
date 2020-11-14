@@ -121,7 +121,7 @@ select d_id from doctor where d_id not in (select d_id from appointments where a
 select d_id from doctor where d_specialization="gynaecologist" and d_id not in (select d_id from appointments where app_time="23:30:00" and app_date="2020-11-14" )  ;
 select d_id from doctor where d_id in (  select d_id from appointments where app_time<>"23:30:00" and app_date<>"2020-11-14" and d_id  in (select d_id from doctor where d_specialization="gynaecologist") );
 select d_id from appointments where app_time<>"23:30:00" and app_date<>"2020-11-14";
-select * from medicine;
+
 select * from doctor where d_specialization='gynaecologist';
 select * from doctor where d_id not in(select d_id from appointments where app_time='23:30:00' and app_date='2020-11-14');
 select * from appointments;
