@@ -11,7 +11,7 @@ const staff_front=()=>{
 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 <Navbar.Collapse id="responsive-navbar-nav">
   <Nav className="mr-auto">
-   <Nav.Link href="/medical-history">View medical history</Nav.Link>
+   <Nav.Link href="/medical-history1">View medical history</Nav.Link>
     <Nav.Link href="/inventory">Check Inventory</Nav.Link>
     <Nav.Link href="/pharmacy">Pharmacy</Nav.Link>
     <Nav.Link href="/billing">Billing</Nav.Link>
@@ -25,13 +25,9 @@ const staff_front=()=>{
 </Navbar>
       <div className="image">
       <img src={image} alt="hello"></img>
-        <p>
-          Name: Florence Nitingale <br></br>
-          Phone number: 938478670 <br></br>
-          Address: Amrita school of engineering , ettimadai.<br></br>
-          city : coimbatore<br></br>
-          pincode : 641010<br></br>
-          state : Tamil Nadu
+        <p><b>“The life so short, the craft so long to learn.”
+                                              ― Hippocrates</b>
+        
         </p>
       </div>
       <div className="calender">

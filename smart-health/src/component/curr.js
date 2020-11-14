@@ -11,7 +11,7 @@ var element;
 
       <div className="thisisit">
       <div className="details">
-        <Link to ="/staff-front"><Button className="home">Home</Button></Link>
+        <Link to ="/user_home"><Button className="home">Home</Button></Link>
         <h1>View my prescription </h1>
         <form id="myForm" onSubmit={(e)=>submit_CP(e)}>
           <div className="start">

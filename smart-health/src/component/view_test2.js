@@ -6,12 +6,12 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 var element;
 //import {useEffect,useState} from 'react';
-  const viewtest=()=>{
+  const viewtest2=()=>{
     return (
 
       <div className="thisisit">
       <div className="details">
-        <Link to ="/user_home"><Button className="home">Home</Button></Link>
+        <Link to ="/doc-front"><Button className="home">Home</Button></Link>
         <h1>View test report</h1>
         <form id="myForm" onSubmit={(e)=>submit_view_test(e)}>
           <div className="start">
@@ -77,4 +77,4 @@ var element;
     }
 }*/
 //export {RandomPlace};
-export default viewtest;
+export default viewtest2;

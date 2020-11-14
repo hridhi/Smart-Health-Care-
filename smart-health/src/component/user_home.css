@@ -2,7 +2,7 @@
     border:3px solid;
     position:absolute;
     top:130px;
-    height:550px;
+    height:fit-content;
     width:600px;
     background-color: #ffffff00;
     font-size: 25px;

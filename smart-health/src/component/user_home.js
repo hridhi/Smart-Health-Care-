@@ -28,12 +28,9 @@ const userhome=()=>{
       <div className="image">
         <img src={image} alt="hello"></img>
           <p>
-            Name: Nishita  <br></br>
-            Phone number: 938478670 <br></br>
-            Address: Amrita school of engineering , ettimadai.<br></br>
-            city : coimbatore<br></br>
-            pincode : 641010<br></br>
-            state : tamil nadu
+          Welcome to ATHENA GROUPS! We at ATHENA Make sure to give our patients utmost superior treatment. If this is your first time logging in please do make sure to
+update your medical history as it would help us get to know you better, here you can set your appointments, view prescriptions and test reports.
+If you need further assistance feel free to contact us, our lines are open 24/7.
           </p>
         </div>
         <div className="calender">

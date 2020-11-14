@@ -10,7 +10,8 @@ import makeappoinment from './component/make-appoinments';
 import staff_front from './component/staff-front';
 import loginnd from './component/login-doc';
 import doc_front from './component/doc-front';
-import MEDICAL from './component/medical_history';         
+import MEDICAL from './component/medical_history';  
+import MEDICAL1 from './component/medical-history1';        
 import billing from './component/billing';
 import pharmacy from './component/pharmacy';
 import inventory from './component/inventory';
@@ -18,6 +19,7 @@ import insurance from './component/insurance';
 import writePrescription from './component/write-prescription';
 import uploadtest from './component/upload-test-report';
 import viewtest from './component/viewtest';
+import viewtest2 from './component/view_test2';
 import currp from './component/curr';
 
 class App extends Component {
@@ -37,6 +39,7 @@ class App extends Component {
              <Route path="/login-doctor" component={loginnd}/>
              <Route path="/doc-front" component={doc_front}/>
              <Route path="/medical-history" component={MEDICAL}/>
+             <Route path="/medical-history1" component={MEDICAL1}/>
              <Route path="/billing" component={billing}/>
              <Route path="/pharmacy" component={pharmacy}/>
              <Route path="/inventory" component={inventory}/>
@@ -44,6 +47,7 @@ class App extends Component {
              <Route path="/write-prescription" component={writePrescription}/>
              <Route path="/uploadtest" component={uploadtest}/>
              <Route path="/viewtest" component={viewtest}/>
+             <Route path="/viewtest2" component={viewtest2}/>
              <Route path="/cprescription" component={currp}/>
            </Switch>
       </BrowserRouter> 

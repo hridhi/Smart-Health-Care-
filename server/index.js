@@ -73,37 +73,92 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.post("/api/login_chk",(request,res)=>{
     const username=request.body.username;
     const password=request.body.pass;
-    console.log('hello')
+    
     if (username && password) 
     {
         db.query('SELECT * FROM login_details WHERE l_usern = ? AND l_pass = ?', [username, password], function(error, results, fields)
         {
             if (results.length > 0) 
             {
-                router.get('/user_home',function (req,res,next) 
-                {
-                    db.getConnection(function(err) 
-                    {
-                    db.query("SELECT l_id FROM login_details where l_usern=?", [username],function (err,result)
-                    {
-                        l_id = JSON.stringify(result[0].l_id)
-                        console.log('lid: '+l_id);   
-                    });
-                    db.query("SELECT * FROM patient_details where l_id=?", [l_id],function (err,result) 
-                    {
-                        //p_details = JSON.stringify(result[0].l_id)
-                        console.log('lid: '+result);
-                    });
-                    /*res.json([
-                    {
-                    }
-                    ])*/
-                });
-                })
+                res.send('SUCCESS..');
             } 
             else 
             {
-				res.status(403).send('Incorrect Username and/or Password!');
+				res.send('Incorrect Username and/or Password!');
+			}			
+			res.end();
+		});
+    }
+    else 
+    {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+}) 
+
+app.post("/d_login_chk",(request,res)=>{
+    const username=request.body.username;
+    const password=request.body.pass;
+    
+    if (username && password) 
+    {
+        db.query('SELECT * FROM login_details WHERE l_usern = ? AND l_pass = ?', [username, password], function(error, results, fields)
+        {
+            
+            
+            if (results.length > 0) 
+            {
+                var l_cat = JSON.stringify(results[0].l_category)
+                l_cat = l_cat.replace(/^"(.*)"$/, '$1')
+                if(l_cat=='staff')
+                {
+                    res.send('SUCCESS..');
+                }
+                else
+                {
+                    res.send('Incorrect Username and/or Password!');
+                }
+            } 
+            else 
+            {
+				res.send('Incorrect Username and/or Password!');
+			}			
+			res.end();
+		});
+    }
+    else 
+    {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+}) 
+app.post("/d_login_chk",(request,res)=>{
+    const username=request.body.username;
+    const password=request.body.pass;
+    
+    if (username && password) 
+    {
+        db.query('SELECT * FROM login_details WHERE l_usern = ? AND l_pass = ?', [username, password], function(error, results, fields)
+        {
+            
+            
+            if (results.length > 0) 
+            {
+                var l_cat = JSON.stringify(results[0].l_category)
+                l_cat = l_cat.replace(/^"(.*)"$/, '$1')
+                if(l_cat=='doctor')
+                {
+                    res.send('SUCCESS..');
+                }
+                else
+                {
+                    res.send('Incorrect Username and/or Password!');
+                }
+                
+            } 
+            else 
+            {
+				res.send('Incorrect Username and/or Password!');
 			}			
 			res.end();
 		});
@@ -229,11 +284,17 @@ app.post("/make-appoinment",(req,res)=>
     const time = req.body.time;
     const date=req.body.date;
     const br_id = req.body.br_id; 
+    const spe = req.body.spe;
+    var d_id1 = new Array();
+    var d_id2 = new Array();
+    var d_id3 = new Array();
+    var n1,n2;
     console.log('hello'+br_id);
     db.getConnection(function(err) 
     {
         db.query("insert into appointments(app_time,app_date,descp,p_id) values (?,?,?,?);", [time,date,desp,pid4],function (err,result) 
         {
+
             console.log('lid: '+result);
             if(err)
             {
@@ -241,6 +302,76 @@ app.post("/make-appoinment",(req,res)=>
             }
         });
     });
+    db.getConnection(function(err) 
+    {
+        db.query("select * from doctor where d_specialization=? and br_id=?;", [spe,br_id],function (err,result) 
+        {
+            if(result.length>0)
+            {
+                var n = result.length;
+                n1 =n;
+                var i;
+                
+                for(i=0;i<n;i++)
+                {
+                    d_id1[i] = JSON.stringify(result[i].d_id);
+                }
+                console.log('1:--'+d_id1);
+            }
+            else
+            {
+                res.send('Please enter a valid specialization.')
+            }
+            db.query("select d_id from appointments where app_time=? and app_date=?;", [time, date],function (err,result) 
+        {
+            if(result.length>0)
+            {
+                var n = result.length;
+                var i;
+                n2=n;
+                for(i=0;i<n;i++)
+                {
+                    d_id2[i] = JSON.stringify(result[i].d_id);
+                }
+                console.log('2:--'+d_id2);
+            }
+            var i,j,k=0,flag=0;
+            for(i=0;i<n1;i++)
+            {
+                for(j=0;j<n2;j++)
+                {
+                    if(d_id1[i]==d_id2[j])
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag==0)
+                {
+                    d_id3[k++] = d_id1[i];
+                }
+                flag=0;
+            }
+            console.log('3:--'+d_id3)
+            if(d_id3.length>0)
+        {
+            db.query("update appointments set d_id = ? where app_time=? and app_date=? and p_id=?;", [d_id3[0],time,date,pid4],function (err,result) 
+            {
+                console.log('did3'+d_id3)
+                res.send(`Your appointment is successfully set with doctor ${d_id3[0]}`);
+            })
+        }
+        else
+        {
+            res.send('No doctors are available in this slot')
+        }
+        })
+         
+        });//query ending
+        
+        
+    });//connector ending
+    
 })
 app.post("/test_report",(req,res)=>
 {
