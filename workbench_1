@@ -42,19 +42,7 @@ p_id integer references patient_details(p_id)
 select * from payments;
 drop table payments;
 insert into payments values (499999,0,'','','',0);
-create table doctor
-(
-d_id integer primary key auto_increment,
-d_name varchar(255),
-d_gender varchar(255),
-d_specialization varchar(255),
-d_phone integer,
-d_zip integer,
-d_age integer,
-d_salary float,
-d_street_name varchar(255),
-br_id integer,l_id integer,d_city varchar(255),d_state varchar(255),foreign key (br_id) references branches(br_id),
-foreign key (l_id) references login_details(l_id));
+create table doctor(d_id integer primary key auto_increment,d_name varchar(255),d_gender varchar(255),d_specialization varchar(255),d_phone integer,d_zip integer,d_age integer,d_salary float,d_street_name varchar(255),br_id integer,l_id integer,d_city varchar(255),d_state varchar(255),foreign key (br_id) references branches(br_id),foreign key (l_id) references login_details(l_id));
 select * from doctor;
 select * from branches;
 truncate doctor;
@@ -66,38 +54,24 @@ insert into login_details values(9003,'anurag','bhowmickme','doctor');
 insert into login_details values(9004,'farhan12','khanfarhan','doctor');
 
 drop table appointments;
-create table appointments(
-app_id integer primary key auto_increment,
-app_time time,
-app_date date,
-descp varchar(1000),
-p_id integer references patient_details(p_id),
-d_id integer references doctor(d_id)
-);
+create table appointments(app_id integer primary key auto_increment,app_time time,app_date date,descp varchar(1000),p_id integer references patient_details(p_id),d_id integer references doctor(d_id));
+
+
+
 select * from branches;
 insert into appointments (app_id) values(699999);
 select * from appointments;
 select * from test_report;
 select * from insurance;
 select * from inventory;
-Create table insurance(
-ins_id integer primary key auto_increment,
-p_id integer REFERENCES patient_details(p_id),
-ins_name varchar(255),
-ins_category varchar(255)
-);
+Create table insurance(ins_id integer primary key auto_increment,p_id integer REFERENCES patient_details(p_id),ins_name varchar(255),ins_category varchar(255));
+
+
 insert into insurance values(7889,200000,'Birla Life insurance','platinum') ;
 insert into insurance values(1438,200001,'SBI life insurance','gold')   ; 
 insert into insurance values (1223,200003,'Excite life insurance','gold');
 
-create table medicine(
-med_id integer primary key auto_increment ,
-med_name varchar(255) ,
-med_status varchar(255),
-med_price float,
-med_category varchar(255),
-br_id integer references branches(br_id)
-);
+create table medicine(med_id integer primary key auto_increment ,med_name varchar(255) ,med_status varchar(255),med_price float,med_category varchar(255),br_id integer references branches(br_id));
 
 insert into medicine values(1452,'avomine','available',15,'nausea',101);
 insert into medicine values(1992,'keraglo','unavailable',200,'supplement',102);
@@ -110,12 +84,6 @@ insert into medicine values(1568,'nise','available',23 ,'body pains',105);
 insert into medicine values(1123,'dolo','available', 65,'fever',101);
 insert into medicine values(1679,'dsr', 'available' ,20 ,'diabetes',106);
 
-create table trial (num integer primary key,chk varchar(255) );
-insert into trial values(1,'123');
-insert into trial values(2,'123');
-insert into trial values(3,'1234');
-select num from trial  where chk='123';
-drop table trial;
 select d_id from doctors where d_id not in( select d_id from doctors where app_time=time and app_date=date);
 select d_id from doctor where d_id not in (select d_id from appointments where app_time="23:30:00" and app_date="2020-11-14" ) and d_id in (select d_id from doctor where d_specialization="gynaecologist");
 select d_id from doctor where d_specialization="gynaecologist" and d_id not in (select d_id from appointments where app_time="23:30:00" and app_date="2020-11-14" )  ;
@@ -156,20 +124,14 @@ Insert into doctor values ( 600006,'farhana khan','female','gynaecologist',90088
 
 create database hospital;
 use hospital;
-create table login_details(
-l_id integer primary key AUTO_INCREMENT, 
-l_usern varchar(255),
-l_pass varchar(255),
-l_category varchar(255));
+create table login_details(l_id integer primary key AUTO_INCREMENT, l_usern varchar(255),l_pass varchar(255),l_category varchar(255));
 
 insert into login_details values (99999,'','','');
 insert into login_details (l_usern,l_pass,l_category) values ('kjanf','kjfn','lmalk');
 truncate table login_details;
 select * from login_details;
 
-create table branches(br_id integer primary key, 
-br_city varchar(255),
-br_state  varchar(255));
+create table branches(br_id integer primary key, br_city varchar(255),br_state  varchar(255));
 Insert into branches  values(101,'agra','uttar pradesh');
 Insert into branches values (102,'kolkata','west bengal');
 Insert into branches values (103,'alappuzha','kerala');
