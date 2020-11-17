@@ -1,6 +1,6 @@
 .Login{
     
-    background-image:url('https://bmcmiri.com/wp-content/uploads/2019/08/bigstock-Doctor-In-Hospital-Background-224963761.jpg');
+    background-image:url('https://image.freepik.com/free-photo/portrait-smiling-asian-medical-male-doctor-standing-front-blurred-interior-hospital_7191-974.jpg');
     height: 750px;
     overflow: auto;
     background-position: center;
@@ -9,14 +9,14 @@
 }
 #box1{
     border:3px solid;
-    position:absolute;
+    position: relative;;
     top:100px;
-    height: 530px;
+    height: 590px;
     width:600px;
     background-color: #ffffff00;
     font-size: 25px;
     font-weight: bold;
-    left:600px;
+    left:100px;
     align-items: flex-end;
 }
 .box1inp{
@@ -35,7 +35,7 @@
     position: absolute;
     height:100px;
     width:100px;
-    bottom:460px;
+    bottom:550px;
     left:240px;
 }
 .but{

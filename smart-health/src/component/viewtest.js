@@ -41,13 +41,21 @@ var element;
     .then(resp=>{
       console.log(resp);
       var details = resp.data;
-      element = <ul>
-      <li> TEST NAME: {details.test_name} </li>
-      <li> TEST CATEGORY: {details.test_category}</li>
-      <li>TEST DETAILS: {details.test_details}</li>
-      </ul>
-      
-      ReactDOM.render(element, document.getElementById('data'));
+      console.log('aaa'+details.length)
+      console.log('bbb'+details)
+      if(details.test_name)
+      {
+        element = <ul>
+        <li> TEST NAME: {details.test_name} </li>
+        <li> TEST CATEGORY: {details.test_category}</li>
+        <li>TEST DETAILS: {details.test_details}</li>
+        </ul>
+        ReactDOM.render(element, document.getElementById('data'));
+      }
+      else
+      {
+        alert('Please enter the patient ID corresponding to your account.');
+      }
       //alert(resp.data);
       
     })

@@ -1,15 +1,17 @@
 import React from 'react';
 import './user_front.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
   const userfront=()=>{
     return (
       <div className="overall">
       <div className="heading"><h1>Welcome</h1>
+      <Link to ="/user_home"><Button className="home1">Home</Button></Link>
       <p>Help us to get you know better </p>
       </div>
       <div className="details">
       <form id="myForm" onSubmit={(e)=>submit_p_medhistory(e)}>
-           <br></br>
            <label>
               enter you patient ID:
               <textarea id="P_ID"name="message" rows="3" cols="30"></textarea>
@@ -83,7 +85,8 @@ import axios from 'axios';
     }
     axios.post('http://localhost:3001/insert_p_med_his',request)
     .then(resp=>{
-      alert(resp.data.message);
+      console.log(resp)
+      alert('Successfully entered medical history'); 
     })
     .catch(err=>{
       console.log(err);

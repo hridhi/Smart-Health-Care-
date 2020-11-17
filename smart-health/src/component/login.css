@@ -1,6 +1,6 @@
 .Login{
     
-    background-image:url('https://bmcmiri.com/wp-content/uploads/2019/08/bigstock-Doctor-In-Hospital-Background-224963761.jpg');
+    background-image:url('https://image.freepik.com/free-photo/african-american-doctor-with-stethoscope-standing-against-blurred-background_93675-1586.jpg');
     height: 750px;
     overflow: auto;
     background-position: center;
@@ -16,7 +16,7 @@
     background-color: #ffffff00;
     font-size: 25px;
     font-weight: bold;
-    left:590px;
+    left:200px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .box1inp{
@@ -25,16 +25,17 @@
 
 }
 .head1{
-    left:900px;
-    position:absolute;
+    
+    position: relative;
+    
     top:220px;
     font-weight: bold;
 }
             .im{
-                position: absolute;
+                position: relative;
                 height:100px;
                 width:100px;
-                bottom:460px;
+                top:-70px;
                 left:240px;
             }
 .submit{

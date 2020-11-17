@@ -38,7 +38,7 @@ function submit_login(e){
       username:document.getElementById('uname').value,
       pass:document.getElementById('pwd').value,
   }
-  axios.post('http://localhost:3001/p_login_chk',request)
+  axios.post('http://localhost:3001/s_login_chk',request)
   .then(resp=>{
     var details = resp.data;
     var element;

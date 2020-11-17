@@ -11,7 +11,8 @@ import staff_front from './component/staff-front';
 import loginnd from './component/login-doc';
 import doc_front from './component/doc-front';
 import MEDICAL from './component/medical_history';  
-import MEDICAL1 from './component/medical-history1';        
+import MEDICAL1 from './component/medical-history1';   
+import MEDICAL2 from './component/medical-history2';      
 import billing from './component/billing';
 import pharmacy from './component/pharmacy';
 import inventory from './component/inventory';
@@ -40,6 +41,7 @@ class App extends Component {
              <Route path="/doc-front" component={doc_front}/>
              <Route path="/medical-history" component={MEDICAL}/>
              <Route path="/medical-history1" component={MEDICAL1}/>
+             <Route path="/medical-history2" component={MEDICAL2}/>
              <Route path="/billing" component={billing}/>
              <Route path="/pharmacy" component={pharmacy}/>
              <Route path="/inventory" component={inventory}/>

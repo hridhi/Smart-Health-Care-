@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 var element;
-const MEDICAL1=()=>{
+const MEDICAL2=()=>{
     return(
         <div className="thisisit">
-        <Link to ="/staff-front"><Button className="homee">Home</Button></Link>
+        <Link to ="/doc-front"><Button className="homee">Home</Button></Link>
         <div className="start"></div>
         <div className="boddy">
         <form id="myForm" onSubmit={(e)=>submit_med_his(e)}>
@@ -46,4 +46,4 @@ function submit_med_his(e){
       console.log(err);
     })
   }
-export default MEDICAL1;
+export default MEDICAL2;

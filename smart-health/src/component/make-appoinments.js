@@ -70,7 +70,7 @@ function submit_appointment(e){
       br_id:document.getElementById('br_id').value,
       spe:document.getElementById('spe').value
   }
-  axios.post('http://localhost:3001/make-appoinment',request)//incomplete
+  axios.post('http://localhost:3001/make-appoinment',request)
   .then(resp=>{
     alert(resp.data);
   })

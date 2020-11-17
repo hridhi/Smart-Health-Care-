@@ -37,7 +37,7 @@ var element;
     let request =  {
       pid5:document.getElementById('pid5').value,
     }
-    axios.post('http://localhost:3001/test_report',request)
+    axios.post('http://localhost:3001/test_report1',request)
     .then(resp=>{
       console.log(resp);
       var details = resp.data;

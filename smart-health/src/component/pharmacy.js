@@ -44,7 +44,7 @@ const pharmacy=()=>{
         <li>MEDICINE NAME: {details.med_name}</li>    
         <li> CATEGORY:{details.med_category} </li>
         <li>AVAILABILITY: {details.med_availability}</li>
-        <li>PRICE: {details.med_price}</li>
+        <li>PRICE: {details.med_price}₹</li>
         </ul>
         
         ReactDOM.render(element, document.getElementById('data'));

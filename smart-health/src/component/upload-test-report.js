@@ -53,7 +53,8 @@ import axios from 'axios';
     }
     axios.post('http://localhost:3001/submit_tst_report',request)
     .then(resp=>{
-      alert(resp.data.message);
+      alert('successfully uploaded');
+      console.log(resp)
     })
     .catch(err=>{
       console.log(err);

@@ -61,18 +61,24 @@ app.post("/api/insert",(req,res)=>{
             console.log(result);})
        });
       }); 
+      res.send('successfully signed up')
     }
     else
     {
+
         console.log('Password mismatched !!...')
+        res.send()
     } 
+    res.end()
 })
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.post("/api/login_chk",(request,res)=>{
+app.post("/api/login_chk",(request,res)=>
+{
     const username=request.body.username;
     const password=request.body.pass;
+    var l_id,gp_id;
     
     if (username && password) 
     {
@@ -86,17 +92,100 @@ app.post("/api/login_chk",(request,res)=>{
             {
 				res.send('Incorrect Username and/or Password!');
 			}			
+            db.query('SELECT * FROM login_details WHERE l_usern = ? AND l_pass = ?', [username, password], function(error, results, fields)
+            {
+            
+            l_id = JSON.stringify(results[0].l_id);
+            //console.log(l_id)
+            db.query('SELECT * FROM patient_details WHERE l_id = ?', [l_id], function(error, results, fields)
+            {
+                gp_id = JSON.stringify(results[0].p_id);
+                //console.log('gp_id'+gp_id)
+                app.post("/test_report",(req,res)=>
+                {
+                    const pid5 = req.body.pid5;
+                    //console.log('pid5'+pid5);
+                  if(pid5==gp_id)
+                  {
+                    db.getConnection(function(err) 
+                    {
+                        //console.log('pid5'+pid5);
+                        db.query("select * from test_report where p_id=(?)", [pid5],function (err,result) 
+                        {
+                            test_name = JSON.stringify(result[0].test_name);
+                            test_doc = JSON.stringify(result[0].test_doc);
+                            test_category = JSON.stringify(result[0].test_category);
+            
+                            const details = res.json(
+                            {
+                                test_name:[test_name.replace(/^"(.*)"$/, '$1')],
+                                test_category:[test_category.replace(/^"(.*)"$/, '$1')],
+                                test_details:[test_doc.replace(/^"(.*)"$/, '$1')]
+                            })
+                        res.send(`${details}`)
+             
+                        });
+                    });
+                  }
+                  else
+                  {
+                    res.send('Please enter the patient ID corresponding to your account.');
+                  }
+                })
+
+                /**************************************** */
+                app.post("/med_his",(req,res)=>
+                {
+                    const pid6 = req.body.pid6;
+                    if(gp_id==pid6)
+                    {
+                        db.getConnection(function(err) 
+                        {
+                            db.query("select * from med_history where p_id=(?)", [pid6],function (err,result) 
+                            {
+                                console.log(result);
+                                med_allergy = JSON.stringify(result[0].med_allergy);
+                                med_current= JSON.stringify(result[0].med_current);
+                                med_past = JSON.stringify(result[0].med_past);
+                                pr_id = JSON.stringify(result[0].pr_id);
+            
+                                const details = res.json(
+                                {
+                                   med_allergy:[med_allergy.replace(/^"(.*)"$/, '$1')],
+                                   med_current:[med_current.replace(/^"(.*)"$/, '$1')],
+                                   med_past:[med_past.replace(/^"(.*)"$/, '$1')],
+                                   pr_id:[pr_id]
+                                })
+                
+                                res.send(`${details}`)
+                
+                    
+            
+            
+                            });
+                        });
+                        
+                    }
+                    else
+                    {
+                        res.send('Please enter the patient ID corresponding to your account.');    
+                    }
+                    
+                })
+                
+		    });	
 			res.end();
 		});
+        });
     }
     else 
     {
 		res.send('Please enter Username and Password!');
 		res.end();
-	}
+    }  
 }) 
 
-app.post("/d_login_chk",(request,res)=>{
+app.post("/s_login_chk",(request,res)=>{
     const username=request.body.username;
     const password=request.body.pass;
     
@@ -190,7 +279,8 @@ app.post("/insert_p_med_his",(req,res)=>
         db.query("insert into med_history(p_id,med_allergy,med_past) values (?,?,?);", [pid,med_allergy,med_past],function (err,result) 
         {
             //l_id = JSON.stringify(result[0])
-            console.log('lid: '+result);   
+            console.log('lid: '+result);  
+            res.send('') 
         });
     });
 })
@@ -207,7 +297,7 @@ app.post("/med_current",(req,res)=>
         db.query("update med_history set med_current= (?) where p_id=(?) ;", [med_current,pid1],function (err,result) 
         {
             //l_id = JSON.stringify(result[0])
-            //console.log('lid: '+result);   
+            console.log('lid: '+result);   
         });
     });
     db.getConnection(function(err) 
@@ -215,7 +305,7 @@ app.post("/med_current",(req,res)=>
         db.query("insert into prescription(pr_status,p_id) values ('active',?);", [pid1],function (err,result) 
         {
             //l_id = JSON.stringify(result[0])
-            //console.log('lid: '+result);   
+            console.log('lid: '+result);   
         });
     });
     db.getConnection(function(err) 
@@ -223,16 +313,18 @@ app.post("/med_current",(req,res)=>
         db.query("select pr_id from prescription where p_id=(?)",[pid1],function (err,result) 
         {
             pr_id1 = JSON.stringify(result[0].pr_id);
+            console.log('pr_id1'+pr_id1)
+            console.log('pid1'+pid1)
+            db.query("update med_history set pr_id= (?) where p_id=(?) ;", [pr_id1,pid1],function (err,result) 
+            {
+            l_id = JSON.stringify(result[0])
+            console.log('lid: '+pid1);   
+            res.send('welcome')
+            });
         });
+
     });
-    db.getConnection(function(err) 
-    {
-        db.query("update med_history set pr_id= (?) where p_id=(?) ;", [pr_id1,pid1],function (err,result) 
-        {
-            //l_id = JSON.stringify(result[0])
-            //console.log('lid: '+result);   
-        });
-    });
+    
 })
 app.post("/submit_tst_report",(req,res)=>
 {
@@ -247,18 +339,17 @@ app.post("/submit_tst_report",(req,res)=>
     {
         db.query("select ts_id from tests where ts_name=(?)",[tst_name],function (err,result) 
         {
-            ts_id1 = JSON.stringify(result[0].ts_id);
+            ts_id1 = JSON.stringify(result[0].ts_id).replace(/^"(.*)"$/, '$1');
             console.log('ts_id',ts_id1);
+            db.query("insert into test_report (test_name,test_doc,ts_id,test_category,p_id) values (?,?,?,?,?);", [tst_name,tst_det,ts_id1,tst_category,pid2],function (err,result) 
+            {
+                
+                    res.send()
+                
+            });
         });
-    });
-    db.getConnection(function(err) 
-    {
-        db.query("insert into test_report (test_name,test_doc,ts_id,test_category,p_id) values (?,?,?,?,?);", [tst_name,tst_det,ts_id1,tst_category,pid2],function (err,result) 
-        {
-            //l_id = JSON.stringify(result[0])
-            //console.log('lid: '+result);   
-        });
-    });
+    
+    })
 })
 app.post("/pay_det",(req,res)=>
 {
@@ -272,7 +363,8 @@ app.post("/pay_det",(req,res)=>
     {
         db.query("insert into payments(pay_amount,pay_status,pay_date,pay_method,p_id) values (?,?,?,?,?);", [pay_amt,pay_status,pay_date,pay_method,pid3],function (err,result) 
         {
-            console.log('lid: '+result);
+            console.log(result);
+            res.send(result)
         });
     });
 })
@@ -316,7 +408,7 @@ app.post("/make-appoinment",(req,res)=>
                 {
                     d_id1[i] = JSON.stringify(result[i].d_id);
                 }
-                console.log('1:--'+d_id1);
+                //console.log('1:--'+d_id1);
             }
             else
             {
@@ -333,7 +425,7 @@ app.post("/make-appoinment",(req,res)=>
                 {
                     d_id2[i] = JSON.stringify(result[i].d_id);
                 }
-                console.log('2:--'+d_id2);
+                //console.log('2:--'+d_id2);
             }
             var i,j,k=0,flag=0;
             for(i=0;i<n1;i++)
@@ -352,12 +444,12 @@ app.post("/make-appoinment",(req,res)=>
                 }
                 flag=0;
             }
-            console.log('3:--'+d_id3)
+           // console.log('3:--'+d_id3)
             if(d_id3.length>0)
         {
             db.query("update appointments set d_id = ? where app_time=? and app_date=? and p_id=?;", [d_id3[0],time,date,pid4],function (err,result) 
             {
-                console.log('did3'+d_id3)
+                //console.log('did3'+d_id3)
                 res.send(`Your appointment is successfully set with doctor ${d_id3[0]}`);
             })
         }
@@ -373,7 +465,8 @@ app.post("/make-appoinment",(req,res)=>
     });//connector ending
     
 })
-app.post("/test_report",(req,res)=>
+
+app.post("/test_report1",(req,res)=>
 {
     const pid5 = req.body.pid5;
 
@@ -395,14 +488,14 @@ app.post("/test_report",(req,res)=>
         });
     });
 })
-app.post("/med_his",(req,res)=>
+app.post("/med_his1",(req,res)=>
 {
     const pid6 = req.body.pid6;
     db.getConnection(function(err) 
     {
         db.query("select * from med_history where p_id=(?)", [pid6],function (err,result) 
         {
-            console.log(result);
+            console.log(result.data);
             med_allergy = JSON.stringify(result[0].med_allergy);
             med_current= JSON.stringify(result[0].med_current);
             med_past = JSON.stringify(result[0].med_past);

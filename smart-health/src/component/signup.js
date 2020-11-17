@@ -2,9 +2,10 @@ import React from 'react';
 import './signup.css';
 import { Link } from 'react-router-dom';
 import { Button } from "react-bootstrap";/*Nav, Navbar,*/
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 //import { Router } from 'express';
-//
+var element;
 const signup=()=>{
   return ( 
     <div className="Login">
@@ -63,11 +64,11 @@ const signup=()=>{
               reenter password:
                 <input type="password" name="name" id="pass_chk" className='box1inp'/>
             </label>
-            <br></br>
-            <Button type="submit" value="Submit" id="submit"className='box1inp' />
-            <script>
-
-            </script>
+            
+            <br></br><br></br>
+            <Button type="submit" value="Submit" id="submit"className='box1inp' >Submit</Button>
+            
+            <div id="data"></div>
             <br></br>
         </form>
        </div>
@@ -94,7 +95,17 @@ function submit_signup(e){
   }
   axios.post('http://localhost:3001/api/insert',request)
   .then(resp=>{
-    alert(resp.data.message);
+    var details = resp.data;
+    if(details)
+    {
+      element = <p >successfully signed up</p>;
+      ReactDOM.render(element, document.getElementById('data'));
+      window.location.replace('/login');
+    }
+    else
+    {
+      alert('Password mismatched !!...')
+    }
   })
   .catch(err=>{
     console.log(err);

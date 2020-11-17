@@ -39,13 +39,21 @@ var element;
     .then(resp=>{
       console.log(resp);
       var details = resp.data;
-      element = <ul>
-      <li>PRESCRIPTION ID:{details.pr_id}</li>    
-      <li>MEDICATION PRESCRIPBED FOR THE PATIENT: {details.med_current}</li>
-      <li>MEDICATION THE PATIENT HAS BEEN IN THE PAST: {details.med_past}</li>
-      </ul>
+      if(details.med_past)
+      {
+        element = <ul>
+        <li>PRESCRIPTION ID:{details.pr_id}</li>    
+        <li>MEDICATION PRESCRIPBED FOR THE PATIENT: {details.med_current}</li>
+        <li>MEDICATION THE PATIENT HAS BEEN IN THE PAST: {details.med_past}</li>
+        </ul>
+        
+        ReactDOM.render(element, document.getElementById('data'));
+      }
+      else
+      {
+        alert('Please enter the patient ID corresponding to your account.');
+      }
       
-      ReactDOM.render(element, document.getElementById('data'));
       
     })
     .catch(err=>{

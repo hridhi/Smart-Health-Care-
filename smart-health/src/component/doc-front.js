@@ -12,7 +12,7 @@ const doc_front=()=>{
 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 <Navbar.Collapse id="responsive-navbar-nav">
   <Nav className="mr-auto">
-    <Nav.Link href="/medical-history">View patient details</Nav.Link>
+    <Nav.Link href="/medical-history2">View patient details</Nav.Link>
     <Nav.Link href="/write-prescription">Write prescription</Nav.Link>
     <Nav.Link href="/viewtest2">View test reports</Nav.Link>
   </Nav>

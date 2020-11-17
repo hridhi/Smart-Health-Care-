@@ -59,7 +59,17 @@ import axios from 'axios';
     }
     axios.post('http://localhost:3001/med_current',request)
     .then(resp=>{
-      alert(resp.data.message);
+      console.log('resp.details'+resp.details)
+      if(resp.details.length>0)
+      {
+        alert('Successfull issued prescription');
+        console.log(resp.data.message)
+      }
+      else
+      {
+        alert('enter valid details');
+      }
+      
     })
     .catch(err=>{
       console.log(err);
